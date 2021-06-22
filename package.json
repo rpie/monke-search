@@ -1,0 +1,22 @@
+{
+  "name": "monke-search",
+  "version": "1.0.0",
+  "description": "Search API to lookup Discord users based off their username, discriminator, snowflake etc",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-specifier-resolution=node --no-warnings ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monkemen/monke-search.git"
+  },
+  "author": "Conner",
+  "bugs": {
+    "url": "https://github.com/monkemen/monke-search/issues"
+  },
+  "homepage": "https://github.com/monkemen/monke-search#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
