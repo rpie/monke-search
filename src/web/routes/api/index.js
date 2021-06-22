@@ -6,9 +6,6 @@
 // Dependencies
 import express from "express";
 
-// Utils
-import Database from "../../../utils/database";
-
 // Schemas
 import User from "../../../schemas/User";
 
