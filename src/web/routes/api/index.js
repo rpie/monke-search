@@ -20,6 +20,20 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/count", async (req, res) => {
+  try {
+    return res.status(200).json({
+      error: false,
+      ammount: await User.countDocuments()
+    });
+  } catch {
+    return res.status(500).json({
+      error: true,
+      message: "Internal server error, please try again later?"
+    });
+  }
+});
+
 router.get("/query", async (req, res) => {
   const { type, identifier } = req.query;
 
