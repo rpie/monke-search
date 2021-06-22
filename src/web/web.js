@@ -10,7 +10,10 @@ import express from "express";
 const app = express();
 
 // Routers
-import { RootRouter } from "./routes";
+import {
+  RootRouter,
+  APIRouter
+} from "./routes";
 
 // Web Class
 class Web {
@@ -21,6 +24,7 @@ class Web {
   static init(port) {
     return new Promise((resolve, reject) => {
       app.use("/", RootRouter);
+      app.use("/api", APIRouter);
 
       app.listen(port, resolve).once("error", reject);
     });
