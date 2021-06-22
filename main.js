@@ -15,7 +15,7 @@ import Logger from "./src/utils/logger";
 env.config();
 
 Web.init(process.env.PORT).then(async () => {
-  if(!await Database.init(process.env.MONGO_URL)) Logger.error("database", "Unable to intialise connection to the MongoDB server!");
+  if(!await Database.init(`mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?authSource=admin`)) Logger.error("database", "Unable to intialise connection to the MongoDB server!");
   else Logger.log("database", "Succesfully initalised connection to the MongoDB server!"); 
 
   Logger.log("web", `Listening on port: ${process.env.PORT}`);

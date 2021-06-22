@@ -5,6 +5,10 @@
 
 // Dependencies
 import mongoose from "mongoose";
+import env from "dotenv";
+
+// Variables
+env.config();
 
 const UserSchema = mongoose.Schema({
   id: {
@@ -51,4 +55,4 @@ const UserSchema = mongoose.Schema({
   versionKey: false
 });
 
-export default mongoose.model("users", UserSchema);
+export default mongoose.model(process.env.MONGO_COLLECTION, UserSchema);
