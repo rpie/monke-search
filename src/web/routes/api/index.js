@@ -14,9 +14,10 @@ import User from "../../../schemas/User";
 
 // Variables
 const router = express.Router();
+const types = [ "id", "username", "discriminator" ]; 
 
 router.get("/", (req, res) => {
-  return res.status(200).json({
+  return res.status(200).json({ 
     error: false,
     message: "Welcome to monke-search API!"
   });
@@ -32,18 +33,31 @@ router.get("/query", async (req, res) => {
       query: req.query
     });
 
-  const user = await User.findOne({ id: identifier }, { _id: 0 });
-    
-  if(!user) 
-    return res.status(404).json({
+  if(types.indexOf(type.toLowerCase()) === -1)
+    return res.status(400).json({
       error: true,
-      message: `Database returned no results for: ${identifier}`
+      message: `Invalid TYPE parameter value\nValid: ${types.join(", ")}`
     });
+    
+  try {
+    const users = await User.find({ [ type ]: identifier }, { _id: 0 });
 
-  return res.status(200).json({
-    error: false,
-    user
-  });
+    if(!users) 
+      return res.status(404).json({
+        error: true,
+        message: `Database returned no results for: ${identifier}`
+      });
+
+    return res.status(200).json({
+      error: false,
+      users: users
+    });  
+  } catch {
+    return res.status(500).json({
+      error: true,
+      message: "Internal server error, please try again later?"
+    });
+  }
 });
 
 export default router;
