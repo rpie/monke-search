@@ -5,10 +5,11 @@
 
 // Dependencies
 import Web from "./src/web/web";
+import env from "dotenv";
 
 // Variables
-import config from "./data/config.json";
+env.config();
 
-Web.init(config.port).then(() => {
-  console.log(`Bound: ${config.port}`)
-}).catch(() => console.log(`Unable to bind: ${config.port}`));
+Web.init(process.env.PORT).then(() => {
+  console.log(`Bound: ${process.env.PORT}`)
+}).catch(() => console.log(`Unable to bind: ${process.env.PORT}`));
