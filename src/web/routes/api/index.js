@@ -50,18 +50,22 @@ router.get("/query", async (req, res) => {
       message: `Invalid TYPE parameter value\nValid: ${types.join(", ")}`
     });
     
+  const start = new Date().getTime();
+
   try {
     const users = await User.find({ [ type ]: identifier }, { _id: 0 });
 
     if(!users) 
       return res.status(404).json({
         error: true,
-        message: `Database returned no results for: ${identifier}`
+        message: `Database returned no results for: ${identifier}`,
+        time: `${new Date().getTime() - start}ms`
       });
 
     return res.status(200).json({
       error: false,
-      users: users
+      users: users,
+      time: `${new Date().getTime() - start}ms`
     });  
   } catch {
     return res.status(500).json({
