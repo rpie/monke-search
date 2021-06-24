@@ -26,6 +26,15 @@ class Web {
       app.use("/", RootRouter);
       app.use("/api", APIRouter);
 
+      app.all("*", (req, res) => {
+        return res.status(404).json({
+          error: true,
+          message: `You cannot make a ${req.method} to ${req.originalUrl}`,
+          method: req.method,
+          path: req.originalUrl
+        });
+      })
+
       app.listen(port, resolve).once("error", reject);
     });
   }
